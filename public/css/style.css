@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5 {
 }
 .buttons{
 	width:100%;
-	margin-top:20px;
+	display:inline-block;
 }
 .buttons .btn {
 	width: calc((100%/3) - 28px);
@@ -61,13 +61,9 @@ h1, h2, h3, h4, h5 {
 	font-weight:bold;
 	letter-spacing:0.5px;
 	padding:8px 4px;
+	overflow:hidden;
 }
 .btn:hover{
 	background:#ED1C24;
 	color:#fff;
-}
-.shadow {
-	-webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.1);
-	-moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.1);
-	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.1);
 }
