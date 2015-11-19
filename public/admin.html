@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>LANWAR X Stream Administration</title>
+	    <link rel='shortcut icon' href='' />
+	    <link rel='stylesheet' type='text/css' href='css/style.css' />
+	    <link rel='stylesheet' type='text/css' href='css/stream.css' />
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+	</head>
+	<body>
+	<div id="main">
+		<div class="head">
+			<h1>LANWAR X Stream Utility</h1>
+			<h4><a href="http://www.lan-ce.com">powered by LANCE</a></h4>
+		</div>
+		<div class="content">
+			<div class="buttons">
+			<a href="/admin"><div class="btn shadow">Stream Updater</div></a>
+			<a href=""><div class="btn shadow">View Notifications</div></a>
+			<a href=""><div class="btn shadow">Twitch Stream</div></a>
+			</div>
+			<p>Post a new notification
+
+		    <form action="" name="chat" id="socket-form">
+		      <input type="text" id="m" autocomplete="off" name="chat"/>
+		      <button type="submit">Send</button>
+		    </form>
+	    	<ul id="messages"></ul>
+		</div>
+	</div>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+	  var div = document.getElementById('messages');
+	  var log = [];
+	  // load previous chat messages ////////////////////////////////////////
+
+	  var socket = io();
+	  $('#socket-form').submit(function(){
+	  	var d = new Date();
+	  	var t = d.getHours() +':'+ d.getMinutes();
+	  	console.log(t);
+	    socket.emit('chatmessage',{time: t, text: $('#m').val()});
+	    $('#m').val('');
+	    return false;
+	  });
+
+	  socket.on('chatmessage', function(msg){
+	    var filteredText = msg.text.trim();
+	    if(filteredText.length == 0){
+	      // empty strings
+	    } else {
+	      var chatmsg = '<li class="shadow"><span>'+msg.time+'</span> '+msg.text+'</li>';
+	     $('#messages').prepend(chatmsg);
+
+	   }
+	  });
+
+	</script>
+	</body>
+</html>
