@@ -20,8 +20,9 @@ app.get('/admin', auth, function(req, res) {
 });
 
 app.get('/stream', function(req, res) {
- res.sendFile(__dirname + '/public/index.html');
+ res.sendFile(__dirname + '/public/stream.html');
 });
+
 
 /////////////////////////////////////////////////////////////////////////
 io.on('connection', function(socket){
