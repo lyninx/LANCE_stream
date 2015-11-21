@@ -7,11 +7,11 @@ ul {
 	padding:0;
 }
 ul :nth-child(even) {
-	background:#f2f2f2;
+	background:rgba(0,0,0,0.1);
 }
 li {
+	color:#eee;
 	list-style: none;
-	background-color:#fff;
 	margin:0;
 	padding:10px;
 	font-weight:bold;
@@ -19,9 +19,4 @@ li {
 li span {
 	color:#ED1C24;
 	margin:0 4px;
-}
-.shadow {
-	-webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.1);
-	-moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.1);
-	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.1);
 }
