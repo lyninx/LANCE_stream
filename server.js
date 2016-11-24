@@ -6,30 +6,20 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 var port     = 3002;
-var basicAuth = require('basic-auth-connect');
 
 var latest = {};
-
-var auth = basicAuth(function(user, pass, callback) {
- var result = (user === 'test' && pass === 'test');
- callback(null /* error */, result);
-});
 
 /////////////////////////////////////////////////////////////////////////
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}));
-app.get('/admin', auth, function(req, res) {
- res.sendFile(__dirname + '/public/admin.html');
-});
-
 app.get('/stream', function(req, res) {
  res.sendFile(__dirname + '/public/stream.html');
 });
 
 app.post('/notification', function(req, res) {
 	console.log(req.body)
-	io.emit('chatmessage',req.body.msg);
+	io.emit('chatmessage',req.body);
 	latest = req.body
   res.json({ "success": true, "notification": latest })
 })

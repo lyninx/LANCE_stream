@@ -10,39 +10,24 @@
 	<div id="main">
 		<div class="content">
 
-	    	<ul id="messages"></ul>
+	    	<div id="messages"></div>
 		</div>
 	</div>
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
-		function addZero(i) {
-		    if (i < 10) {
-		        i = "0" + i;
-		    }
-		    return i;
-		}
-
-	  var div = document.getElementById('messages');
-	  var log = [];
-	  // load previous chat messages ////////////////////////////////////////
-
 	  var socket = io();
-	  $('#socket-form').submit(function(){
-	  	var d = new Date();
-	  	var t = d.getHours() +':'+ addZero(d.getMinutes());
-	  	console.log(t);
-	    socket.emit('chatmessage',{time: t, text: $('#m').val()});
-	    $('#m').val('');
-	    return false;
-	  });
 
 	  socket.on('chatmessage', function(msg){
+	  	console.log(msg);
 	    var filteredText = msg.text.trim();
 	    if(filteredText.length == 0){
 	      // empty strings
 	    } else {
-	      var chatmsg = '<li class="shadow"><span>'+msg.time+'</span> '+msg.text+'</li>';
-	     $('#messages').prepend(chatmsg);
+	    	var time = new Date(msg.date).toTimeString().substring(0,9);
+	    	console.log(time)
+	      var chatmsg = '<div class="notif"><div class="time">'+time
+	      +'</div><div class="msg"> '+msg.text+'</div><div class="auth">'+msg.author+'</div></div>';
+	     $('#messages').html(chatmsg);
 
 	   }
 	  });

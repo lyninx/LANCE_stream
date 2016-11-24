@@ -3,20 +3,27 @@ body {
 	font-weight: normal; 
 	font-family: Geneva, Tahoma, Verdana, sans-serif;
 }
-ul {
-	padding:0;
+
+.notif {
+	background:rgba(0,0,0,0.7);
+	color:#fff;
+	font-size:24px;
+	font-weight: bold;
+	letter-spacing:0.5px;
+	padding:8px;
+
 }
-ul :nth-child(even) {
-	background:rgba(0,0,0,0.1);
+.msg {
+	display:inline-block;
 }
-li {
-	color:#eee;
-	list-style: none;
-	margin:0;
-	padding:10px;
-	font-weight:bold;
+.time {
+	color:#ff3e46;
+	display:inline-block;
+	float:left;
+	padding-right:24px;
 }
-li span {
-	color:#ED1C24;
-	margin:0 4px;
+.auth {
+	color:#ccc;
+	display:inline-block;
+	float:right;
 }
