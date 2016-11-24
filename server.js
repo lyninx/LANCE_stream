@@ -4,7 +4,7 @@ var app      = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var port     = process.env.PORT || 3000;
+var port     = 3001;
 var basicAuth = require('basic-auth-connect');
 
 var auth = basicAuth(function(user, pass, callback) {
@@ -22,6 +22,11 @@ app.get('/admin', auth, function(req, res) {
 app.get('/stream', function(req, res) {
  res.sendFile(__dirname + '/public/stream.html');
 });
+
+app.post('/notification', function(req, res) {
+
+  res.json({ "success": true })
+})
 
 
 /////////////////////////////////////////////////////////////////////////
