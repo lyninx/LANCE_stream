@@ -23,7 +23,7 @@
 	    if(filteredText.length == 0){
 	      // empty strings
 	    } else {
-	    	var time = new Date(msg.date).toTimeString().substring(0,9);
+	    	var time = new Date(msg.date).toTimeString().substring(0,5);
 	    	console.log(time)
 	      var chatmsg = '<div class="notif"><div class="time">'+time
 	      +'</div><div class="msg"> '+msg.text+'</div><div class="auth">'+msg.author+'</div></div>';
