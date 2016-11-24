@@ -1,4 +1,5 @@
 var express  = require('express');
+var bodyParser = require('body-parser');
 var app      = express();
 
 var http = require('http').Server(app);
@@ -7,6 +8,8 @@ var io = require('socket.io')(http);
 var port     = 3002;
 var basicAuth = require('basic-auth-connect');
 
+var latest = {};
+
 var auth = basicAuth(function(user, pass, callback) {
  var result = (user === 'test' && pass === 'test');
  callback(null /* error */, result);
@@ -14,7 +17,8 @@ var auth = basicAuth(function(user, pass, callback) {
 
 /////////////////////////////////////////////////////////////////////////
 app.use(express.static(__dirname + '/public'));
-
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}));
 app.get('/admin', auth, function(req, res) {
  res.sendFile(__dirname + '/public/admin.html');
 });
@@ -24,10 +28,11 @@ app.get('/stream', function(req, res) {
 });
 
 app.post('/notification', function(req, res) {
-
-  res.json({ "success": true })
+	console.log(req.body)
+	io.emit('chatmessage',req.body.msg);
+	latest = req.body
+  res.json({ "success": true, "notification": latest })
 })
-
 
 /////////////////////////////////////////////////////////////////////////
 io.on('connection', function(socket){
@@ -43,6 +48,7 @@ io.on('connection', function(socket){
 		//io.emit('chatmessage', msg);
 		io.sockets.emit('chatmessage',msg);
 	});
+
 });
 
 http.listen(port);
