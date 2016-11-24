@@ -4,7 +4,7 @@ var app      = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var port     = 3001;
+var port     = 3002;
 var basicAuth = require('basic-auth-connect');
 
 var auth = basicAuth(function(user, pass, callback) {
